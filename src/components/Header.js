@@ -1,18 +1,19 @@
-function Header(){
+function Header({theme}){
     return(
-        <div className="padT4 PadB4">
+       
+        <div className="padT4 PadB4 ">
             <div className="container mobile-container" >
                 <div className="d-flex justify-content-between">
                     <div>
                         <img alt="SVCC Home Page"
                         src="/images/SVCCLogo.png" />
                     </div>
-                    <div className="Light">
+                    <div className={theme === "Light" ? " ": "text-info"} >
                         <h4 className="header-title">
                             Silicon Valley Code Camp
                         </h4>
                     </div>
-                    <div className="text-dark">
+                    <div  className={theme === "Light" ? " ": "text-info"}>
                         Hello Mr.Smith &nbsp;&nbsp;
                         <span>
                             <a href="#">sign-out</a>
@@ -21,6 +22,7 @@ function Header(){
                 </div>
             </div>
         </div>
+        
     );
 }
 
