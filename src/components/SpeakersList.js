@@ -1,27 +1,38 @@
 import Speaker from "./Speaker";
 import {data} from "../../SpeakerData";
-import {useState} from "react";
+// import Speaker from "./Speaker";
+import useRequestDelay, { REQUEST_STATUS } from "../hooks/useRequestDelay";
+// import { resolve } from "styled-jsx/css";
+import ReactPlaceHolder from "react-placeholder";
+import useRequestSpeakers from "../hooks/useRequestDelay";
 
 function SpeakersList({showSessions}){
 
-   const [speakersData, setSpeakersData] = useState(data);
+  const {
+    data : speakersData , 
+    requestStatus,
+     error,
+    updateRecord,
+  } = useRequestDelay(2000 , data)
 
-   function onFavoriteToggle(id){
-    const speakersRecPrevious = speakersData.find(function (rec){
-      return rec.id === id;
-    });
-    const speakerRecUpdated = {
-      ...speakersRecPrevious, favorite: !speakersRecPrevious.favorite
-    };
-    const speakersDataNew = speakersData.map(function (rec)  {
-      return rec.id === id ? speakerRecUpdated : rec;
-    });
-
-    setSpeakersData(speakersDataNew);
+   
+   if(requestStatus === REQUEST_STATUS.FAILURE){
+    return(
+      <div className="text-danger">
+        ERROR: <b>loading Speaker data Failed {error}</b>
+      </div>
+    )
    }
+  //  if (isLoading === true) return <div>Loading...</div>
 
     return(
         <div className="container speakers-list">
+          <ReactPlaceHolder
+          type = "media"
+          rows = {15}
+          className="speakerslist-placeholder"
+          ready={requestStatus === REQUEST_STATUS.SUCCESS}
+          >
         <div className="row">
           {data.map(function (speaker){
              return(
@@ -29,12 +40,16 @@ function SpeakersList({showSessions}){
                key ={speaker.id} 
                speaker={speaker}
                showSessions={showSessions}
-               onFavoriteToggle={() =>{
-                onFavoriteToggle(speaker.id);
+               onFavoriteToggle={(doneCallBack) =>{
+                   updateRecord({
+                    ...speaker,
+                    favorite: !speaker.favorite,
+                   }, doneCallBack);
                }} />
               );
           })}
       </div>
+      </ReactPlaceHolder>
     </div>
     );
 }

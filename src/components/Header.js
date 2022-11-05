@@ -1,4 +1,8 @@
-function Header({theme}){
+import {ThemeContext} from "../contexts/ThemeContext";
+import {useContext} from "react";
+
+function Header(){
+    const {theme} = useContext(ThemeContext);
     return(
        
         <div className="padT4 PadB4 ">

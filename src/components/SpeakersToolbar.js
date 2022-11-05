@@ -1,11 +1,11 @@
+import {ThemeContext} from "../contexts/ThemeContext";
+import {useContext} from "react";
 
-
-function SpeakersToolbar({theme, setTheme, showSessions , setShowSessions}){
-
+function SpeakersToolbar({showSessions , setShowSessions}){
+  const {theme, setTheme} = useContext(ThemeContext);
     return(
        
         <section className="toolbar dark-theme-header ">
-             <div className={theme === "Light" ? " ": "bg-light"}>
             <div  className="container" >
                 <div className="justify-content-between">
                     <ul className=" toolrow d-flex flex-column flex-lg-row">
@@ -36,7 +36,6 @@ function SpeakersToolbar({theme, setTheme, showSessions , setShowSessions}){
                         </li>
                     </ul>
                 </div>
-            </div>
             </div>
         </section>
     );
