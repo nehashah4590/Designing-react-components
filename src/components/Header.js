@@ -12,12 +12,12 @@ function Header(){
                         <img alt="SVCC Home Page"
                         src="/images/SVCCLogo.png" />
                     </div>
-                    <div className={theme === "Light" ? " ": "text-info"} >
+                    <div className={theme === "light" ? " ": "text-info"} >
                         <h4 className="header-title">
                             Silicon Valley Code Camp
                         </h4>
                     </div>
-                    <div  className={theme === "Light" ? " ": "text-info"}>
+                    <div  className={theme === "light" ? " ": "text-info"}>
                         Hello Mr.Smith &nbsp;&nbsp;
                         <span>
                             <a href="#">sign-out</a>
